@@ -24,8 +24,8 @@ public class Sprite {
 	private int width;
 	private int height;
 	private int currentFrame = 0;
-	private MediaPlayer mario;
-	private MediaPlayer bowser;
+	private MediaPlayer mplMario;
+	private MediaPlayer mplBowser;
 	public int tipo;// MARIO O BOWSER
 
 	public Sprite(Gameboard board, Bitmap bmp, int tipo) {
@@ -38,8 +38,8 @@ public class Sprite {
 		y = rnd.nextInt(board.getHeight() - height);
 		xSpeed = rnd.nextInt(10) - 5;
 		ySpeed = rnd.nextInt(10) - 5;
-		bowser = MediaPlayer.create(board.getContext(), R.raw.bowser);
-		mario = MediaPlayer.create(board.getContext(), R.raw.mario);
+		mplBowser = MediaPlayer.create(board.getContext(), R.raw.bowser);
+		mplMario = MediaPlayer.create(board.getContext(), R.raw.mario);
 		this.tipo = tipo;
 	}
 
@@ -77,10 +77,10 @@ public class Sprite {
 	public void sound() {
 		switch (tipo) {
 		case MARIO:
-			mario.start();
+			mplMario.start();
 			break;
 		case BOWSER:
-			bowser.start();
+			mplBowser.start();
 			break;
 		default:
 			break;
