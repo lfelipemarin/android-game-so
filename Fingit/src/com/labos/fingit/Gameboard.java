@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
+import android.widget.Toast;
 
 public class Gameboard extends SurfaceView {
 
@@ -23,8 +24,8 @@ public class Gameboard extends SurfaceView {
 	public List<Sprite> spritesBowser = new ArrayList<Sprite>();
 	private long lastClick;
 	private Bitmap bmpSangre;
-	static private final int BUENOS = 20;
-	static private final int MALOS = 30;
+	static private final int BUENOS = 2;
+	static private final int MALOS = 3;
 	public int score = 0;
 	public long time;
 	public Dialog dialog;
@@ -72,7 +73,14 @@ public class Gameboard extends SurfaceView {
 	}
 
 	public boolean gameOver() {
-		return spritesBowser.isEmpty();
+		if (spritesBowser.isEmpty()) {
+			Toast toast = Toast.makeText(getContext(), "Score: " + score,
+					Toast.LENGTH_SHORT);
+			toast.show();
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -91,6 +99,16 @@ public class Gameboard extends SurfaceView {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
+		// ClientScore cs = new ClientScore(new Score("opjcoeggevnf",
+		// 42993023));
+		// Thread nth = new Thread(cs);
+		// nth.start();
+		// Toast toast = Toast.makeText(getContext(), "Mensaje 1",
+		// Toast.LENGTH_SHORT);
+		// toast.show();
+		Toast toast = Toast.makeText(getContext(), "Score: " + score,
+				Toast.LENGTH_SHORT);
+		toast.show();
 		boolean hecho = false;
 		if (System.currentTimeMillis() - lastClick > 500) {
 			lastClick = System.currentTimeMillis();
@@ -104,7 +122,7 @@ public class Gameboard extends SurfaceView {
 					time = System.currentTimeMillis();
 					if (sprite.hayColision(x, y)) {
 						sprite.sound();// suena segun su tipo
-						score = score + (int) time;
+						score = score + 13 * (i+1);
 						spritesBowser.remove(sprite);
 						spritesSangre.add(new Sangre(this, x, y, bmpSangre));
 						hecho = true;
@@ -117,7 +135,7 @@ public class Gameboard extends SurfaceView {
 						time = System.currentTimeMillis();
 						if (sprite.hayColision(x, y)) {
 							sprite.sound();
-							score = score - (int) time;
+							score = score - 17 * (i+1);
 							spritesMario.remove(sprite);
 							spritesSangre
 									.add(new Sangre(this, x, y, bmpSangre));
