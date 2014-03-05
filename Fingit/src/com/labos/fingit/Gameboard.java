@@ -64,10 +64,10 @@ public class Gameboard extends SurfaceView {
 
 	private void crearSprites() {
 		for (int i = 0; i < BUENOS; i++) {
-			spritesMario.add(this.crearSprite(R.drawable.sangre, 0));
+			spritesMario.add(this.crearSprite(R.drawable.mario_moves, 0));
 		}
 		for (int i = 0; i < MALOS; i++) {
-			spritesBowser.add(this.crearSprite(R.drawable.sangre, 1));
+			spritesBowser.add(this.crearSprite(R.drawable.bowser_moves, 1));
 		}
 	}
 
