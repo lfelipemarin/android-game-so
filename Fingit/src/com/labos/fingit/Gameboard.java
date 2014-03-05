@@ -17,6 +17,7 @@ import android.view.SurfaceView;
 public class Gameboard extends SurfaceView {
 
 	private SurfaceHolder holder;
+	private GameLoop gameLoop;
 	public List<Sangre> spritesSangre = new ArrayList<Sangre>();
 	public List<Sprite> spritesMario = new ArrayList<Sprite>();
 	public List<Sprite> spritesBowser = new ArrayList<Sprite>();
@@ -30,6 +31,7 @@ public class Gameboard extends SurfaceView {
 
 	public Gameboard(Context context) {
 		super(context);
+		gameLoop = new GameLoop(this);
 		bmpSangre = BitmapFactory.decodeResource(getResources(),
 				R.drawable.sangre);
 		holder = getHolder();
@@ -44,6 +46,8 @@ public class Gameboard extends SurfaceView {
 			@Override
 			public void surfaceCreated(SurfaceHolder arg0) {
 				crearSprites();
+				gameLoop.setRunning(true);
+				gameLoop.start();
 			}
 
 			@Override
