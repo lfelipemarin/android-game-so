@@ -3,6 +3,8 @@ package com.labos.fingit;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +18,7 @@ public class RankActivity extends Activity implements View.OnClickListener {
 	public int score;
 	public final int N = 10;
 	public ArrayList<Score> topn;
+	private MediaPlayer mplToprank;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -29,11 +32,13 @@ public class RankActivity extends Activity implements View.OnClickListener {
 		btnOk.setOnClickListener(this);
 		txtPuntos = (TextView) findViewById(R.id.txtPuntos);
 		txtPuntos.setText(String.valueOf("" + score));
+		mplToprank = MediaPlayer.create(this, R.raw.toprank);
 	}
 
 	@Override
-	public void onClick(View arg0) {		
-		System.out.println(Thread.currentThread().getId() + " [INFO] "+HASH+" "+score);
+	public void onClick(View arg0) {
+		System.out.println(Thread.currentThread().getId() + " [INFO] " + HASH
+				+ " " + score);
 		ClientScore enviarScore = new ClientScore(new Score(HASH, score));
 		Thread tenviarScore = new Thread(enviarScore);
 		tenviarScore.start();
@@ -81,27 +86,26 @@ public class RankActivity extends Activity implements View.OnClickListener {
 							+ " Error esperando a hijo " + treceptor.getId()
 							+ " " + e);
 				}
-				// try {
 				if (receptor.recibido) {
 					Rank rank = receptor.getRank();
 					System.out.println(Thread.currentThread().getId()
 							+ " Leyendo top " + N + "...");
-
+					String[] values = new String[rank.getRank().size()];
 					for (int i = 0; i < rank.getRank().size(); i++) {
 						Score s = rank.getRank().get(i);
-						System.out.println(Thread.currentThread().getId()
-								+ " "+(i+1)+". " + s.getHash() + " " + s.getPuntos());
+						values[i] = s.getHash() + " " + s.getPuntos();
+						System.out.println(Thread.currentThread().getId() + " "
+								+ (i + 1) + ". " + s.getHash() + " "
+								+ s.getPuntos());
 					}
+					if (HASH.equals(topn.get(0).getHash())) {
+						mplToprank.start();
+					}
+					Intent intentToplist = new Intent(this, RankActivity.class);
+					intentToplist.putExtra("topn", values);
+					this.startActivity(intentToplist);
 				}
-				// } catch (Exception e) {
-				// System.out.println(Thread.currentThread().getId()
-				// + " Error leyendo el top. " + e);
-				// }
 			}
 		}
-
-		// Toast msjOk = Toast.makeText(this, "Se consulto y volvio.",
-		// Toast.LENGTH_LONG);
-		// msjOk.show();
 	}
 }

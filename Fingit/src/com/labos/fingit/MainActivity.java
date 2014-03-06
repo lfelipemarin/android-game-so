@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.Settings.Secure;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,10 +13,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private Button btnStart;
 	private Button btnRanking;
 	private MediaPlayer mplIntro;
+	public String HASH;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		HASH = Secure.getString(this.getContentResolver(), Secure.ANDROID_ID);
 		setContentView(R.layout.activity_main);
 		btnStart = (Button) findViewById(R.id.btnStart);
 		btnStart.setOnClickListener(this);
@@ -34,7 +37,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			this.startActivity(intentGame);
 			break;
 		case R.id.btnRanking:
-			Intent intentRank = new Intent(this, RankActivity.class);
+			Intent intentRank = new Intent(this, RankActivity.class);			
+			intentRank.putExtra("hash", HASH);
+			intentRank.putExtra("score", 0);
 			this.startActivity(intentRank);
 			break;
 		default:
