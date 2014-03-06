@@ -4,5 +4,13 @@
     <string name="app_name">Fingit</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="background">bacgr</string>
+    <string name="strBtnIniciar">Iniciar Juego</string>
+    <string name="strRanking">Ranking</string>
+    <string name="strStart">Start</string>
+    <string name="strPuntos">0</string>
+    <string name="strPuntuacion">PUNTUACION</string>
+    <string name="syncServ">Syncronizar con servidor?</string>
+    <string name="strOk">OK</string>
 
 </resources>

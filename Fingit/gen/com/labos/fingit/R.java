@@ -22,16 +22,20 @@ public final class R {
     }
     public static final class drawable {
         public static final int bowser_moves=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int mario_moves=0x7f020002;
-        public static final int sangre=0x7f020003;
+        public static final int fondo=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
+        public static final int mario_moves=0x7f020003;
+        public static final int sangre=0x7f020004;
     }
     public static final class id {
-        public static final int action_settings=0x7f090004;
-        public static final int btnOk=0x7f090003;
-        public static final int txtPtx=0x7f090000;
-        public static final int txtPuntos=0x7f090001;
-        public static final int txtSync=0x7f090002;
+        public static final int action_settings=0x7f090007;
+        public static final int background=0x7f090000;
+        public static final int btnOk=0x7f090006;
+        public static final int btnRanking=0x7f090002;
+        public static final int btnStart=0x7f090001;
+        public static final int txtPtx=0x7f090003;
+        public static final int txtPuntos=0x7f090004;
+        public static final int txtSync=0x7f090005;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -47,11 +51,20 @@ public final class R {
         public static final int nomario=0x7f040003;
         public static final int open=0x7f040004;
         public static final int peach=0x7f040005;
+        public static final int toprank=0x7f040006;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
+        public static final int background=0x7f060003;
         public static final int hello_world=0x7f060002;
+        public static final int strBtnIniciar=0x7f060004;
+        public static final int strOk=0x7f06000a;
+        public static final int strPuntos=0x7f060007;
+        public static final int strPuntuacion=0x7f060008;
+        public static final int strRanking=0x7f060005;
+        public static final int strStart=0x7f060006;
+        public static final int syncServ=0x7f060009;
     }
     public static final class style {
         /** 

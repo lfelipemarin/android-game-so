@@ -13,14 +13,14 @@
             android:id="@+id/txtPtx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PUNTUACION"
+            android:text="@string/strPuntuacion"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/txtPuntos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
+            android:text="@string/strPuntos"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </LinearLayout>
@@ -33,14 +33,14 @@
             android:id="@+id/txtSync"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sincronizar con servidor?"
+            android:text="@string/syncServ"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Button
             android:id="@+id/btnOk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ok" />
+            android:text="@string/strOk" />
 
     </LinearLayout>
 
