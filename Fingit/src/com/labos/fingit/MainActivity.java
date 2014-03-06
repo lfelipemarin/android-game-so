@@ -8,9 +8,13 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		 setContentView(new Gameboard(this));
-//		ClientScore cs = new ClientScore(new Score("opjcoeggevnf", 42993023));
-//		Thread nth = new Thread(cs);
-//		nth.start();
+		setContentView(new Gameboard(this));
+//		Receptor rc = new Receptor();
+//		Thread trc = new Thread(rc);
+//		trc.start();
+		// ClientScore cs = new ClientScore(new Score("opjcoeggevnf",
+		// 42993023));
+		// Thread nth = new Thread(cs);
+		// nth.start();
 	}
 }
