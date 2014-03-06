@@ -2,6 +2,7 @@ package com.labos.fingit;
 
 import java.util.ArrayList;
 import java.util.List;
+import android.provider.Settings.Secure;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,11 +10,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
-import android.widget.Toast;
 
 public class Gameboard extends SurfaceView {
 
@@ -24,19 +25,34 @@ public class Gameboard extends SurfaceView {
 	public List<Sprite> spritesBowser = new ArrayList<Sprite>();
 	private long lastClick;
 	private Bitmap bmpSangre;
-	static private final int BUENOS = 2;
-	static private final int MALOS = 3;
+	static private final int BUENOS = 1;
+	static private final int MALOS = 1;
+	public final String HASH;
 	public int score = 0;
 	public long time;
 	public Dialog dialog;
+	private MediaPlayer mplOpen;
+	private MediaPlayer mplNomario;
+	private MediaPlayer mplAnymario;
+	private MediaPlayer mplPeach;
+
+	// private MediaPlayer mplSong;
+	// private Context context;
 
 	public Gameboard(Context context) {
 		super(context);
+		HASH = Secure.getString(getContext().getContentResolver(),
+				Secure.ANDROID_ID);
+		mplOpen = MediaPlayer.create(context, R.raw.open);
+		mplNomario = MediaPlayer.create(context, R.raw.nomario);
+		mplAnymario = MediaPlayer.create(context, R.raw.anymario);
+		mplPeach = MediaPlayer.create(context, R.raw.peach);
+		// mplSong = MediaPlayer.create(context, R.raw.song);
 		gameLoop = new GameLoop(this);
 		bmpSangre = BitmapFactory.decodeResource(getResources(),
 				R.drawable.sangre);
 		holder = getHolder();
-		dialog = new Dialog(context);
+		// dialog = new Dialog(context);
 		holder.addCallback(new Callback() {
 
 			@Override
@@ -47,8 +63,11 @@ public class Gameboard extends SurfaceView {
 			@Override
 			public void surfaceCreated(SurfaceHolder arg0) {
 				crearSprites();
+				mplOpen.start();
 				gameLoop.setRunning(true);
 				gameLoop.start();
+				// mplSong.start();
+				// mplOpen.release();
 			}
 
 			@Override
@@ -56,6 +75,15 @@ public class Gameboard extends SurfaceView {
 			}
 
 		});
+	}
+
+	public void finalSound() {
+		mplPeach.start();
+		if (!spritesMario.isEmpty()) {
+			mplAnymario.start();
+		} else {
+			mplNomario.start();
+		}
 	}
 
 	private Sprite crearSprite(int resource, int tipo) {
@@ -73,42 +101,36 @@ public class Gameboard extends SurfaceView {
 	}
 
 	public boolean gameOver() {
-		if (spritesBowser.isEmpty()) {
-			Toast toast = Toast.makeText(getContext(), "Score: " + score,
-					Toast.LENGTH_SHORT);
-			toast.show();
-			return true;
-		} else {
-			return false;
-		}
+		return spritesBowser.isEmpty();
+		// if (spritesBowser.isEmpty()) {
+		// Toast toast = Toast.makeText(getContext(), "Score: " + score,
+		// Toast.LENGTH_SHORT);
+		// toast.show();
+		// return true;
+		// } else {
+		// return false;
+		// }
 	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
 		canvas.drawColor(Color.BLACK);
+		for (int i = this.spritesBowser.size() - 1; i >= 0; i--) {
+			this.spritesBowser.get(i).onDraw(canvas);
+		}
 		for (int i = this.spritesSangre.size() - 1; i >= 0; i--) {
 			this.spritesSangre.get(i).onDraw(canvas);
 		}
-		for (Sprite sprite : spritesMario) {
-			sprite.onDraw(canvas);
-		}
-		for (Sprite sprite : spritesBowser) {
-			sprite.onDraw(canvas);
+		for (int i = this.spritesMario.size() - 1; i >= 0; i--) {
+			this.spritesMario.get(i).onDraw(canvas);
 		}
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		// ClientScore cs = new ClientScore(new Score("opjcoeggevnf",
-		// 42993023));
-		// Thread nth = new Thread(cs);
-		// nth.start();
-		// Toast toast = Toast.makeText(getContext(), "Mensaje 1",
+		// Toast toast = Toast.makeText(getContext(), "Score: " + score,
 		// Toast.LENGTH_SHORT);
 		// toast.show();
-		Toast toast = Toast.makeText(getContext(), "Score: " + score,
-				Toast.LENGTH_SHORT);
-		toast.show();
 		boolean hecho = false;
 		if (System.currentTimeMillis() - lastClick > 500) {
 			lastClick = System.currentTimeMillis();
@@ -122,7 +144,8 @@ public class Gameboard extends SurfaceView {
 					time = System.currentTimeMillis();
 					if (sprite.hayColision(x, y)) {
 						sprite.sound();// suena segun su tipo
-						score = score + 13 * (i+1);
+						score = score
+								+ (sprite.getxSpeed() * sprite.getySpeed());
 						spritesBowser.remove(sprite);
 						spritesSangre.add(new Sangre(this, x, y, bmpSangre));
 						hecho = true;
@@ -135,7 +158,9 @@ public class Gameboard extends SurfaceView {
 						time = System.currentTimeMillis();
 						if (sprite.hayColision(x, y)) {
 							sprite.sound();
-							score = score - 17 * (i+1);
+							// score = score - (int) (Math.random() * score);
+							score = score
+									+ (sprite.getxSpeed() * sprite.getySpeed());
 							spritesMario.remove(sprite);
 							spritesSangre
 									.add(new Sangre(this, x, y, bmpSangre));
@@ -149,5 +174,4 @@ public class Gameboard extends SurfaceView {
 		}
 		return true;
 	}
-
 }

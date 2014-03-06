@@ -36,22 +36,22 @@ public class Sprite {
 		Random rnd = new Random();
 		x = rnd.nextInt(board.getWidth() - width);
 		y = rnd.nextInt(board.getHeight() - height);
-		xSpeed = rnd.nextInt(10) - 5;
-		ySpeed = rnd.nextInt(10) - 5;
+		setxSpeed(rnd.nextInt(10) - 5);
+		setySpeed(rnd.nextInt(10) - 5);
 		mplBowser = MediaPlayer.create(board.getContext(), R.raw.bowser);
 		mplMario = MediaPlayer.create(board.getContext(), R.raw.mario);
 		this.tipo = tipo;
 	}
 
 	private void update() {
-		if (x > board.getWidth() - width - xSpeed || x + xSpeed < 0) {
-			xSpeed = -xSpeed;
+		if (x > board.getWidth() - width - getxSpeed() || x + getxSpeed() < 0) {
+			setxSpeed(-getxSpeed());
 		}
-		x = x + xSpeed;
-		if (y > board.getHeight() - height - ySpeed || y + ySpeed < 0) {
-			ySpeed = -ySpeed;
+		x = x + getxSpeed();
+		if (y > board.getHeight() - height - getySpeed() || y + getySpeed() < 0) {
+			setySpeed(-getySpeed());
 		}
-		y = y + ySpeed;
+		y = y + getySpeed();
 		currentFrame = ++currentFrame % BMP_COLUMNAS;
 	}
 
@@ -65,7 +65,8 @@ public class Sprite {
 	}
 
 	private int getAnimationRow() {
-		double dirDouble = (Math.atan2(xSpeed, ySpeed) / (Math.PI / 2) + 2);
+		double dirDouble = (Math.atan2(getxSpeed(), getySpeed())
+				/ (Math.PI / 2) + 2);
 		int direction = (int) Math.round(dirDouble) % BMP_FILAS;
 		return MAPA_ANIMACIONES[direction];
 	}
@@ -85,5 +86,21 @@ public class Sprite {
 		default:
 			break;
 		}
+	}
+
+	public int getxSpeed() {
+		return xSpeed;
+	}
+
+	private void setxSpeed(int xSpeed) {
+		this.xSpeed = xSpeed;
+	}
+
+	public int getySpeed() {
+		return ySpeed;
+	}
+
+	private void setySpeed(int ySpeed) {
+		this.ySpeed = ySpeed;
 	}
 }

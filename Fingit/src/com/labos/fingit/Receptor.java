@@ -11,23 +11,28 @@ public class Receptor implements Runnable {
 
 	private boolean running;
 	final int PUERTO = 6668;
-	private ResultSet rs;
+	private Rank rank;
+	public boolean recibido;
 
 	@Override
 	public void run() {
 		setRunning(true);
+		recibido = false;
 		while (running) {
 			try {
 				ServerSocket ss = new ServerSocket(PUERTO);
-				System.out.println(Thread.currentThread().getId()
-						+ " Puerto abierto android, esperando paquete.");
+				System.out
+						.println(Thread.currentThread().getId()
+								+ " Puerto abierto android, esperando paquete con el top.");
 				Socket s = ss.accept();
 				InputStream is = s.getInputStream();
 				ObjectInputStream ois = new ObjectInputStream(is);
-				rs = (ResultSet) ois.readObject();
-				if (rs != null) {
+				setRank((Rank) ois.readObject());
+				if (getRank() != null) {
+					recibido = true;
 					System.out.println(Thread.currentThread().getId()
-							+ " Recibido " + rs.toString());
+							+ " Recibido " + getRank().toString());
+					setRunning(false);
 				}
 				is.close();
 				s.close();
@@ -44,6 +49,14 @@ public class Receptor implements Runnable {
 
 	public void setRunning(boolean running) {
 		this.running = running;
+	}
+
+	public Rank getRank() {
+		return rank;
+	}
+
+	private void setRank(Rank rank) {
+		this.rank = rank;
 	}
 
 }
