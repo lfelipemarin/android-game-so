@@ -13,6 +13,7 @@
             android:src="@drawable/fondo" />
 
         <RelativeLayout
+            android:id="@+id/reativeLay"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
@@ -34,6 +35,33 @@
                 android:layout_alignRight="@+id/btnStart"
                 android:layout_below="@+id/btnStart"
                 android:text="@string/strRanking" />
+
+            <SeekBar
+                android:id="@+id/seekEnemies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="85dp" />
+
+            <TextView
+                android:id="@+id/txvEnemies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/btnRanking"
+                android:layout_alignTop="@+id/seekEnemies"
+                android:layout_marginTop="33dp"
+                android:text="@string/strEnemies"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/txtEnemiesv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/txvEnemies"
+                android:layout_toLeftOf="@+id/btnRanking"
+                android:text="@string/strEnemiesVa"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </RelativeLayout>
 

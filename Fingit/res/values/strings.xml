@@ -13,5 +13,7 @@
     <string name="syncServ">Syncronizar con servidor?</string>
     <string name="strOk">OK</string>
     <string name="strHash">Hash ID:</string>
+    <string name="strEnemies">Enemigos</string>
+    <string name="strEnemiesVa">0</string>
 
 </resources>

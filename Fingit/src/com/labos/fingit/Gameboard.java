@@ -25,8 +25,8 @@ public class Gameboard extends SurfaceView {
 	public List<Sprite> spritesBowser = new ArrayList<Sprite>();
 	private long lastClick;
 	private Bitmap bmpSangre;
-	static private final int MALOS = 1;
-	static private final int BUENOS = MALOS * 3;
+	private int MALOS;
+	private int BUENOS;
 	public final String HASH;
 	public int score = 0;
 	public long time;
@@ -39,14 +39,12 @@ public class Gameboard extends SurfaceView {
 	// private MediaPlayer mplSong;
 	// private Context context;
 
-	public Gameboard(Context context) {
+	public Gameboard(Context context, int enemigos) {
 		super(context);
+		this.BUENOS = enemigos * 2;
+		this.MALOS = enemigos;
 		HASH = Secure.getString(getContext().getContentResolver(),
 				Secure.ANDROID_ID);
-//		mplOpen.setAudioStreamType(AudioManager.STREAM_MUSIC);
-//		mplNomario.setAudioStreamType(AudioManager.STREAM_MUSIC);
-//		mplAnymario.setAudioStreamType(AudioManager.STREAM_MUSIC);
-//		mplPeach.setAudioStreamType(AudioManager.STREAM_MUSIC);
 		mplOpen = MediaPlayer.create(context, R.raw.open);
 		mplNomario = MediaPlayer.create(context, R.raw.nomario);
 		mplAnymario = MediaPlayer.create(context, R.raw.anymario);
@@ -91,7 +89,6 @@ public class Gameboard extends SurfaceView {
 	}
 
 	public void finalSound() {
-		mplPeach.start();
 		if (!spritesMario.isEmpty()) {
 			mplAnymario.start();
 		} else {

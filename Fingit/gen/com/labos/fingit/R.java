@@ -28,16 +28,20 @@ public final class R {
         public static final int sangre=0x7f020004;
     }
     public static final class id {
-        public static final int action_settings=0x7f090009;
+        public static final int action_settings=0x7f09000d;
         public static final int background=0x7f090000;
-        public static final int btnRanking=0x7f090002;
-        public static final int btnStart=0x7f090001;
-        public static final int buttonOk=0x7f090007;
-        public static final int listTop=0x7f090008;
-        public static final int txtHash=0x7f090004;
-        public static final int txtPuntos=0x7f090005;
-        public static final int txvHast=0x7f090003;
-        public static final int txvPunt=0x7f090006;
+        public static final int btnRanking=0x7f090003;
+        public static final int btnStart=0x7f090002;
+        public static final int buttonOk=0x7f09000b;
+        public static final int listTop=0x7f09000c;
+        public static final int reativeLay=0x7f090001;
+        public static final int seekEnemies=0x7f090004;
+        public static final int txtEnemiesv=0x7f090006;
+        public static final int txtHash=0x7f090008;
+        public static final int txtPuntos=0x7f090009;
+        public static final int txvEnemies=0x7f090005;
+        public static final int txvHast=0x7f090007;
+        public static final int txvPunt=0x7f09000a;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -62,6 +66,8 @@ public final class R {
         public static final int background=0x7f060003;
         public static final int hello_world=0x7f060002;
         public static final int strBtnIniciar=0x7f060004;
+        public static final int strEnemies=0x7f06000c;
+        public static final int strEnemiesVa=0x7f06000d;
         public static final int strHash=0x7f06000b;
         public static final int strOk=0x7f06000a;
         public static final int strPuntos=0x7f060007;

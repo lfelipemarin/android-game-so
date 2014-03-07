@@ -35,12 +35,6 @@ public class RankActivity extends Activity implements View.OnClickListener {
 		txvPuntos.setText("" + score);
 		txvHash = (TextView) findViewById(R.id.txtHash);
 		txvHash.setText(HASH);
-		// btnOk = (Button) findViewById(R.id.txtHash);
-		// btnOk.setOnClickListener(this);
-		// txtPuntos = (TextView) findViewById(R.id.txtPuntos);
-		// txtPuntos.setText(String.valueOf("" + score));
-		// txtHash = (TextView) findViewById(R.id.btnok);
-		// txtHash.setText(HASH);
 		mplToprank = MediaPlayer.create(this, R.raw.toprank);
 	}
 
@@ -107,10 +101,10 @@ public class RankActivity extends Activity implements View.OnClickListener {
 								+ (i + 1) + ". " + s.getHash() + " "
 								+ s.getPuntos());
 					}
-					if (HASH.equals(topn.get(0).getHash())) {
+					if (HASH.equals(rank.getRank().get(0).getHash())) {
 						mplToprank.start();
 					}
-					Intent intentToplist = new Intent(this, RankActivity.class);
+					Intent intentToplist = new Intent(this, TopListActivity.class);
 					intentToplist.putExtra("topn", values);
 					this.startActivity(intentToplist);
 				}

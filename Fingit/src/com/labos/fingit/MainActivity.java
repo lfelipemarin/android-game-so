@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.provider.Settings.Secure;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -14,6 +17,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private Button btnRanking;
 	private MediaPlayer mplIntro;
 	public String HASH;
+	private SeekBar seekBar;
+	private TextView txvEnemies;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +32,28 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		// mplIntro.setAudioStreamType(AudioManager.STREAM_MUSIC);
 		mplIntro = MediaPlayer.create(this, R.raw.peach);
 		mplIntro.start();
+		seekBar = (SeekBar) findViewById(R.id.seekEnemies);
+		seekBar.setProgress(1);
+		seekBar.setMax(33);
+		txvEnemies = (TextView) findViewById(R.id.txtEnemiesv);
+		// Initialize the textview with '0'
+		txvEnemies.setText(seekBar.getProgress() + "/" + seekBar.getMax());
+		seekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+			@Override
+			public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
+				txvEnemies.setText(seekBar.getProgress() + "/"
+						+ seekBar.getMax());
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar arg0) {
+			}
+
+			@Override
+			public void onStopTrackingTouch(SeekBar arg0) {
+			}
+
+		});
 	}
 
 	@Override
@@ -35,6 +62,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		switch (arg0.getId()) {
 		case R.id.btnStart:
 			Intent intentGame = new Intent(this, GameActivity.class);
+			intentGame.putExtra("enemigos", seekBar.getProgress());
 			this.startActivity(intentGame);
 			break;
 		case R.id.btnRanking:

@@ -10,7 +10,8 @@ public class GameActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		gb = new Gameboard(this);
+		Bundle args = getIntent().getExtras();
+		gb = new Gameboard(this, args.getInt("enemigos"));
 		setContentView(gb);
 	}
 
