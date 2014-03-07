@@ -12,9 +12,9 @@ import android.widget.TextView;
 
 public class RankActivity extends Activity implements View.OnClickListener {
 
-	private Button btnOk;
-	private TextView txtPuntos;
-	private TextView txtHash;
+	private Button buttonOk;
+	private TextView txvPuntos;
+	private TextView txvHash;
 	public String HASH;
 	public int score;
 	public final int N = 10;
@@ -29,12 +29,18 @@ public class RankActivity extends Activity implements View.OnClickListener {
 		this.topn = new ArrayList<Score>();
 		HASH = args.getString("hash");
 		score = args.getInt("score");
-		btnOk = (Button) findViewById(R.id.btnOk);
-		btnOk.setOnClickListener(this);
-		txtPuntos = (TextView) findViewById(R.id.txtPuntos);
-		txtPuntos.setText(String.valueOf("" + score));
-		txtHash = (TextView) findViewById(R.id.txtHash);
-		txtHash.setText(HASH);
+		buttonOk = (Button) findViewById(R.id.buttonOk);
+		buttonOk.setOnClickListener(this);
+		txvPuntos = (TextView) findViewById(R.id.txtPuntos);
+		txvPuntos.setText("" + score);
+		txvHash = (TextView) findViewById(R.id.txtHash);
+		txvHash.setText(HASH);
+		// btnOk = (Button) findViewById(R.id.txtHash);
+		// btnOk.setOnClickListener(this);
+		// txtPuntos = (TextView) findViewById(R.id.txtPuntos);
+		// txtPuntos.setText(String.valueOf("" + score));
+		// txtHash = (TextView) findViewById(R.id.btnok);
+		// txtHash.setText(HASH);
 		mplToprank = MediaPlayer.create(this, R.raw.toprank);
 	}
 

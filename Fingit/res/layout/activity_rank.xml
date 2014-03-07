@@ -1,52 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/background"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="22dp"
-        android:text="@string/strHash"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical"
+        android:contentDescription="@string/background"
+        android:scaleType="fitCenter"
+        android:src="@drawable/fondo" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/txtPuntos"
-        android:layout_alignParentLeft="true"
-        android:text="@string/strPuntuacion"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-    <Button
-        android:id="@+id/btnOk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView4"
-        android:layout_marginTop="14dp"
-        android:text="@string/syncServ" />
+        <TextView
+            android:id="@+id/txvHast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/strHash"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/txtHash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="26dp"
-        android:text="@string/strPuntos" />
+        <TextView
+            android:id="@+id/txtHash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txvHast"
+            android:layout_alignBottom="@+id/txvHast"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="36dp"
+            android:text="@string/strPuntos" />
 
-    <TextView
-        android:id="@+id/txtPuntos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtHash"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="20dp"
-        android:layout_toRightOf="@+id/textView4"
-        android:text="@string/strPuntos" />
+        <TextView
+            android:id="@+id/txtPuntos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/txtHash"
+            android:layout_below="@+id/txvHast"
+            android:layout_marginTop="26dp"
+            android:text="@string/strPuntos" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/txvPunt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/txtPuntos"
+            android:layout_alignLeft="@+id/txvHast"
+            android:layout_marginLeft="32dp"
+            android:text="@string/strPuntuacion"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Button
+            android:id="@+id/buttonOk"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="15dp"
+            android:text="@string/syncServ" />
+
+    </RelativeLayout>
+
+</FrameLayout>
