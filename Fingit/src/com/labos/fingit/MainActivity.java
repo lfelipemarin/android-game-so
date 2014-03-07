@@ -24,6 +24,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		btnStart.setOnClickListener(this);
 		btnRanking = (Button) findViewById(R.id.btnRanking);
 		btnRanking.setOnClickListener(this);
+		// mplIntro.setAudioStreamType(AudioManager.STREAM_MUSIC);
 		mplIntro = MediaPlayer.create(this, R.raw.peach);
 		mplIntro.start();
 	}
@@ -37,7 +38,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			this.startActivity(intentGame);
 			break;
 		case R.id.btnRanking:
-			Intent intentRank = new Intent(this, RankActivity.class);			
+			Intent intentRank = new Intent(this, RankActivity.class);
 			intentRank.putExtra("hash", HASH);
 			intentRank.putExtra("score", 0);
 			this.startActivity(intentRank);
@@ -47,5 +48,25 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			break;
 		}
 
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+	}
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
 	}
 }

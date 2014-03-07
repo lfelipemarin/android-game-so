@@ -9,8 +9,9 @@
     <string name="strRanking">Ranking</string>
     <string name="strStart">Start</string>
     <string name="strPuntos">0</string>
-    <string name="strPuntuacion">PUNTUACION</string>
+    <string name="strPuntuacion">PUNTUACION:</string>
     <string name="syncServ">Syncronizar con servidor?</string>
     <string name="strOk">OK</string>
+    <string name="strHash">HASH:</string>
 
 </resources>

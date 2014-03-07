@@ -1,47 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="fill_horizontal|right" >
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="22dp"
+        android:text="@string/strHash"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <TextView
-            android:id="@+id/txtPtx"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/strPuntuacion"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/txtPuntos"
+        android:layout_alignParentLeft="true"
+        android:text="@string/strPuntuacion"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <TextView
-            android:id="@+id/txtPuntos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/strPuntos"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="14dp"
+        android:text="@string/syncServ" />
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/txtHash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="26dp"
+        android:text="@string/strPuntos" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+    <TextView
+        android:id="@+id/txtPuntos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtHash"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/textView4"
+        android:text="@string/strPuntos" />
 
-        <TextView
-            android:id="@+id/txtSync"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/syncServ"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <Button
-            android:id="@+id/btnOk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/strOk" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

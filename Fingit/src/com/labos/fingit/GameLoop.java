@@ -45,6 +45,7 @@ public class GameLoop extends Thread {
 				System.out.println(e);
 			}
 			if (gb.gameOver()) {
+				gb.mplOpen.release();			
 				System.out.println(Thread.currentThread().getId()
 						+ " GAME OVER.");
 				gb.finalSound();
@@ -52,24 +53,13 @@ public class GameLoop extends Thread {
 						+ " Lanzando Ranking.");
 				Intent intent = new Intent(this.gb.getContext(),
 						RankActivity.class);
+				gb.score = gb.score + gb.spritesMario.size();
 				intent.putExtra("hash", gb.HASH); // Optional parameters
 				intent.putExtra("score", gb.score);
 				gb.getContext().startActivity(intent);
 				setRunning(false);
-				System.out.println(Thread.currentThread().getId()
-						+ " Juego detenido.");
-				// for (int i = 0; i < gb.spritesMario.size(); i++) {
-				// gb.time = System.currentTimeMillis();
-				// gb.score = gb.score + (int) gb.time;
-				// }
-				// Toast toast = Toast.makeText(gb.getContext(), "Score",
-				// Toast.LENGTH_SHORT);
-				// toast.show();
-				// try {
-				// sleep(10000);
-				// } catch (InterruptedException e) {
-				// e.printStackTrace();
-				// }
+				System.out.println(Thread.currentThread().getId()						+ " Juego detenido.");
+
 				setRunning(false);
 			}
 		}

@@ -2,7 +2,6 @@ package com.labos.fingit;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.provider.Settings.Secure;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.provider.Settings.Secure;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
@@ -25,16 +25,16 @@ public class Gameboard extends SurfaceView {
 	public List<Sprite> spritesBowser = new ArrayList<Sprite>();
 	private long lastClick;
 	private Bitmap bmpSangre;
-	static private final int BUENOS = 1;
 	static private final int MALOS = 1;
+	static private final int BUENOS = MALOS * 3;
 	public final String HASH;
 	public int score = 0;
 	public long time;
 	public Dialog dialog;
-	private MediaPlayer mplOpen;
-	private MediaPlayer mplNomario;
-	private MediaPlayer mplAnymario;
-	private MediaPlayer mplPeach;
+	public MediaPlayer mplOpen;
+	public MediaPlayer mplNomario;
+	public MediaPlayer mplAnymario;
+	public MediaPlayer mplPeach;
 
 	// private MediaPlayer mplSong;
 	// private Context context;
@@ -43,6 +43,10 @@ public class Gameboard extends SurfaceView {
 		super(context);
 		HASH = Secure.getString(getContext().getContentResolver(),
 				Secure.ANDROID_ID);
+//		mplOpen.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//		mplNomario.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//		mplAnymario.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//		mplPeach.setAudioStreamType(AudioManager.STREAM_MUSIC);
 		mplOpen = MediaPlayer.create(context, R.raw.open);
 		mplNomario = MediaPlayer.create(context, R.raw.nomario);
 		mplAnymario = MediaPlayer.create(context, R.raw.anymario);
@@ -72,6 +76,15 @@ public class Gameboard extends SurfaceView {
 
 			@Override
 			public void surfaceDestroyed(SurfaceHolder arg0) {
+				boolean retry = true;
+				gameLoop.setRunning(false);
+				while (retry) {
+					try {
+						gameLoop.join();
+						retry = false;
+					} catch (InterruptedException e) {
+					}
+				}
 			}
 
 		});
@@ -144,8 +157,7 @@ public class Gameboard extends SurfaceView {
 					time = System.currentTimeMillis();
 					if (sprite.hayColision(x, y)) {
 						sprite.sound();// suena segun su tipo
-						score = score
-								+ (sprite.getxSpeed() * sprite.getySpeed());
+						score++;
 						spritesBowser.remove(sprite);
 						spritesSangre.add(new Sangre(this, x, y, bmpSangre));
 						hecho = true;
@@ -159,8 +171,7 @@ public class Gameboard extends SurfaceView {
 						if (sprite.hayColision(x, y)) {
 							sprite.sound();
 							// score = score - (int) (Math.random() * score);
-							score = score
-									+ (sprite.getxSpeed() * sprite.getySpeed());
+							score--;
 							spritesMario.remove(sprite);
 							spritesSangre
 									.add(new Sangre(this, x, y, bmpSangre));

@@ -5,17 +5,32 @@ import android.os.Bundle;
 
 public class GameActivity extends Activity {
 
+	private Gameboard gb;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(new Gameboard(this));
-		// Receptor rc = new Receptor();
-		// Thread trc = new Thread(rc);
-		// trc.start();
-		// ClientScore cs = new ClientScore(new Score("opjcoeggevnf",
-		// 42993023));
-		// Thread nth = new Thread(cs);
-		// nth.start();
+		gb = new Gameboard(this);
+		setContentView(gb);
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+	}
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+	}
 }

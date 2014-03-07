@@ -14,6 +14,7 @@ public class RankActivity extends Activity implements View.OnClickListener {
 
 	private Button btnOk;
 	private TextView txtPuntos;
+	private TextView txtHash;
 	public String HASH;
 	public int score;
 	public final int N = 10;
@@ -32,6 +33,8 @@ public class RankActivity extends Activity implements View.OnClickListener {
 		btnOk.setOnClickListener(this);
 		txtPuntos = (TextView) findViewById(R.id.txtPuntos);
 		txtPuntos.setText(String.valueOf("" + score));
+		txtHash = (TextView) findViewById(R.id.txtHash);
+		txtHash.setText(HASH);
 		mplToprank = MediaPlayer.create(this, R.raw.toprank);
 	}
 
@@ -107,5 +110,25 @@ public class RankActivity extends Activity implements View.OnClickListener {
 				}
 			}
 		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+	}
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
 	}
 }
