@@ -35,6 +35,9 @@ public class Gameboard extends SurfaceView {
 	public MediaPlayer mplNomario;
 	public MediaPlayer mplAnymario;
 	public MediaPlayer mplPeach;
+	public int clock;
+	public Reloj reloj;
+	public Thread treloj;
 
 	// private MediaPlayer mplSong;
 	// private Context context;
@@ -43,6 +46,8 @@ public class Gameboard extends SurfaceView {
 		super(context);
 		this.BUENOS = enemigos * 2;
 		this.MALOS = enemigos;
+		this.reloj = new Reloj(MALOS * 4);
+		this.treloj = new Thread(reloj);
 		HASH = Secure.getString(getContext().getContentResolver(),
 				Secure.ANDROID_ID);
 		mplOpen = MediaPlayer.create(context, R.raw.open);
@@ -66,6 +71,7 @@ public class Gameboard extends SurfaceView {
 			public void surfaceCreated(SurfaceHolder arg0) {
 				crearSprites();
 				mplOpen.start();
+				treloj.start();
 				gameLoop.setRunning(true);
 				gameLoop.start();
 				// mplSong.start();
@@ -79,8 +85,11 @@ public class Gameboard extends SurfaceView {
 				while (retry) {
 					try {
 						gameLoop.join();
+						treloj.join();
 						retry = false;
 					} catch (InterruptedException e) {
+						System.out.println(Thread.currentThread().getId()
+								+ " Error join hijos destroy sfcviw. "+e);
 					}
 				}
 			}

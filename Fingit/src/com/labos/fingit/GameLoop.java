@@ -45,7 +45,7 @@ public class GameLoop extends Thread {
 				System.out.println(e);
 			}
 			if (gb.gameOver()) {
-				gb.mplOpen.release();			
+				gb.mplOpen.release();
 				System.out.println(Thread.currentThread().getId()
 						+ " GAME OVER.");
 				gb.finalSound();
@@ -53,13 +53,30 @@ public class GameLoop extends Thread {
 						+ " Lanzando Ranking.");
 				Intent intent = new Intent(this.gb.getContext(),
 						RankActivity.class);
-				gb.score = gb.score + gb.spritesMario.size();
+				gb.score = gb.score + gb.spritesMario.size() * gb.reloj.time;
 				intent.putExtra("hash", gb.HASH); // Optional parameters
 				intent.putExtra("score", gb.score);
 				gb.getContext().startActivity(intent);
 				setRunning(false);
-				System.out.println(Thread.currentThread().getId()						+ " Juego detenido.");
-
+				System.out.println(Thread.currentThread().getId()
+						+ " Juego detenido.");
+				setRunning(false);
+			}
+			if (gb.reloj.time == 0) {
+				gb.mplNomario.start();
+				gb.treloj.stop();
+				System.out.println(Thread.currentThread().getId()
+						+ " Time's up.");
+				System.out.println(Thread.currentThread().getId()
+						+ " GAME OVER.");
+				System.out.println(Thread.currentThread().getId()
+						+ " Lanzando Ranking.");
+				Intent intent = new Intent(this.gb.getContext(),
+						RankActivity.class);
+				gb.score = 0;
+				intent.putExtra("hash", gb.HASH); // Optional parameters
+				intent.putExtra("score", gb.score);
+				gb.getContext().startActivity(intent);
 				setRunning(false);
 			}
 		}
