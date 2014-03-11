@@ -20,10 +20,15 @@ public class RankActivity extends Activity implements View.OnClickListener {
 	public final int N = 10;
 	public ArrayList<Score> topn;
 	private MediaPlayer mplToprank;
+	public Reloj reloj;
+	public Thread treloj;
+	private final int TIME_OUT_SERVER = 10;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.reloj = new Reloj(TIME_OUT_SERVER);
+		this.treloj = new Thread(reloj);
 		setContentView(R.layout.activity_rank);
 		Bundle args = getIntent().getExtras();
 		this.topn = new ArrayList<Score>();
@@ -104,7 +109,8 @@ public class RankActivity extends Activity implements View.OnClickListener {
 					if (HASH.equals(rank.getRank().get(0).getHash())) {
 						mplToprank.start();
 					}
-					Intent intentToplist = new Intent(this, TopListActivity.class);
+					Intent intentToplist = new Intent(this,
+							TopListActivity.class);
 					intentToplist.putExtra("topn", values);
 					this.startActivity(intentToplist);
 				}

@@ -62,9 +62,9 @@ public class GameLoop extends Thread {
 						+ " Juego detenido.");
 				setRunning(false);
 			}
-			if (gb.reloj.time == 0) {
+			if (gb.reloj.finish) {
 				gb.mplNomario.start();
-				gb.treloj.stop();
+//				gb.treloj.stop();
 				System.out.println(Thread.currentThread().getId()
 						+ " Time's up.");
 				System.out.println(Thread.currentThread().getId()

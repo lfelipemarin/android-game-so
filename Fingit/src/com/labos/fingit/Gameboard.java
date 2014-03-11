@@ -9,6 +9,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.media.MediaPlayer;
 import android.provider.Settings.Secure;
 import android.view.MotionEvent;
@@ -38,15 +40,21 @@ public class Gameboard extends SurfaceView {
 	public int clock;
 	public Reloj reloj;
 	public Thread treloj;
+	private Paint paint;
 
 	// private MediaPlayer mplSong;
 	// private Context context;
 
 	public Gameboard(Context context, int enemigos) {
 		super(context);
+		paint = new Paint();
+		paint.setColor(Color.WHITE);
+		paint.setStyle(Style.FILL);
+		// paint.setColor(Color.BLACK);
+		paint.setTextSize(18);
 		this.BUENOS = enemigos * 2;
 		this.MALOS = enemigos;
-		this.reloj = new Reloj(MALOS * 4);
+		this.reloj = new Reloj(MALOS * 3);
 		this.treloj = new Thread(reloj);
 		HASH = Secure.getString(getContext().getContentResolver(),
 				Secure.ANDROID_ID);
@@ -89,7 +97,7 @@ public class Gameboard extends SurfaceView {
 						retry = false;
 					} catch (InterruptedException e) {
 						System.out.println(Thread.currentThread().getId()
-								+ " Error join hijos destroy sfcviw. "+e);
+								+ " Error join hijos destroy sfcviw. " + e);
 					}
 				}
 			}
@@ -99,8 +107,10 @@ public class Gameboard extends SurfaceView {
 
 	public void finalSound() {
 		if (!spritesMario.isEmpty()) {
+			System.out.println(Thread.currentThread().getId() + " Ganaste!!!");
 			mplAnymario.start();
 		} else {
+			System.out.println(Thread.currentThread().getId() + " Perdiste!!!");
 			mplNomario.start();
 		}
 	}
@@ -134,6 +144,9 @@ public class Gameboard extends SurfaceView {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		canvas.drawColor(Color.BLACK);
+		canvas.drawText("Marios: " + spritesMario.size(), 10, 25, paint);
+		canvas.drawText("Bowsers: " + spritesBowser.size(), 10, 40, paint);
+		canvas.drawText("Quedan " + reloj.time + " segundo(s)", 10, 55, paint);
 		for (int i = this.spritesBowser.size() - 1; i >= 0; i--) {
 			this.spritesBowser.get(i).onDraw(canvas);
 		}
