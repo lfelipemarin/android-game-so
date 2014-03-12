@@ -3,6 +3,7 @@ package com.labos.fingit;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -95,6 +96,7 @@ public class Gameboard extends SurfaceView {
 						gameLoop.join();
 						treloj.join();
 						retry = false;
+						((Activity) getContext()).finish();
 					} catch (InterruptedException e) {
 						System.out.println(Thread.currentThread().getId()
 								+ " Error join hijos destroy sfcviw. " + e);
@@ -146,7 +148,7 @@ public class Gameboard extends SurfaceView {
 		canvas.drawColor(Color.BLACK);
 		canvas.drawText("Marios: " + spritesMario.size(), 10, 25, paint);
 		canvas.drawText("Bowsers: " + spritesBowser.size(), 10, 40, paint);
-		canvas.drawText("Quedan " + reloj.time + " segundo(s)", 10, 55, paint);
+		canvas.drawText("Tiempo: " + reloj.time, 10, 55, paint);
 		for (int i = this.spritesBowser.size() - 1; i >= 0; i--) {
 			this.spritesBowser.get(i).onDraw(canvas);
 		}
